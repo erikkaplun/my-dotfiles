@@ -1,0 +1,11 @@
+[user]
+name = Erik Allik
+email = eallik@gmail.com
+
+[color]
+ui = auto
+
+[core]
+#pager = mate
+[core]
+	editor = emacsclient -nw
