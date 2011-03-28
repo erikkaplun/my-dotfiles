@@ -15,11 +15,14 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 export MANPATH=/opt/local/share/man:$MANPATH
 
-export PATH=/Users/erik/bin:$PATH
 export PATH=/opt/local/Library/Frameworks/Python.framework/Versions/2.6/bin:$PATH
 export PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin:$PATH
+#export PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH
+export PATH=/Applications/Racket/bin:$PATH
+export PATH=/Users/erik/bin:$PATH
 
-export EDITOR="emacsclient -nw"
+export EDITOR="emacsclient"
+alias ec=emacsclient
 
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 
