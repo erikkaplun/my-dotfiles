@@ -22,7 +22,8 @@ export PATH=/Applications/Racket/bin:$PATH
 export PATH=/Users/erik/bin:$PATH
 
 export EDITOR="emacsclient"
-alias ec=emacsclient
+alias ec="emacsclient -nw"
+alias ecw=emacsclient
 
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 
@@ -33,4 +34,9 @@ alias wec="cd ~/work/webevident/contacts; act"
 
 source ~/django_bash_completion
 source ~/git-completion.bash
-source /opt/local/bin/virtualenvwrapper_bashrc-2.6
+source /usr/local/share/python/virtualenvwrapper.sh
+source ~/pip-completion.bash
+
+export VIRTUALENV_USE_DISTRIBUTE=1
+
+alias g=git
