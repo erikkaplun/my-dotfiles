@@ -40,5 +40,5 @@ alias listf="find . -not -name \"__init__.py\" | grep -v -e \"\\.svn\\|\\.git\" 
 alias listd="find . -type d | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
 alias listpy="listf | grep -e \"\\.py$\""
 
-alias onc="cd ~/work/opennode-console-exp; ls -l"
-alias ons="cd ~/work/opennode-management; ls -l"
+alias onc="cd ~/work/opennode/console; ls -l"
+alias ons="cd ~/work/opennode/management; ls -l"
