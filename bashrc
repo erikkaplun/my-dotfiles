@@ -32,13 +32,20 @@ export VIRTUALENV_USE_DISTRIBUTE=1
 
 alias g=git
 alias s='g status'
+alias gs='g status'
 alias a='g add'
+alias ga='g add'
 alias d='g diff'
-alias ds='g diff --staged'
+alias gd='g diff'
+alias gds='g diff --staged'
+alias gf='g fetch'
+alias gnews='g log master..origin/master'
+alias gfn='gf; gnews'
+alias gp='g push'
 
 alias listf="find . -not -name \"__init__.py\" | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
 alias listd="find . -type d | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
 alias listpy="listf | grep -e \"\\.py$\""
 
 alias onc="cd ~/work/opennode/console; ls -l"
-alias ons="cd ~/work/opennode/management; ls -l"
+alias oms="cd ~/work/opennode/management; ls -l"
