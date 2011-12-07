@@ -38,9 +38,10 @@ alias ga='g add'
 alias d='g diff'
 alias gd='g diff'
 alias gds='g diff --staged'
+alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gf='g fetch'
-alias gnews='g log master..origin/master'
-alias gfn='gf; gnews'
+alias gw='gl master..origin/master'  # what's new
+alias gr='g rebase origin/master master'
 alias gp='g push'
 
 alias listf="find . -not -name \"__init__.py\" | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
