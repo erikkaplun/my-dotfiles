@@ -42,6 +42,7 @@ alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
 alias gf='g fetch'
 alias gw='gl master..origin/master'  # what's new
 alias gr='g rebase origin/master master'
+alias gst='g stash'
 alias gp='g push'
 
 alias listf="find . -not -name \"__init__.py\" | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
