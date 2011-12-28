@@ -14,7 +14,7 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 
 export MANPATH=/opt/local/share/man:/usr/local/share/man:$MANPATH
 
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/Users/erik/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:~/bin:$PATH
 
 export EDITOR="emacsclient"
 alias ec="emacsclient -nw"
@@ -51,3 +51,5 @@ alias listpy="listf | grep -e \"\\.py$\""
 
 alias onc="cd ~/work/opennode/console"
 alias oms="cd ~/work/opennode/management"
+
+alias dude='du -d0 -h .'
