@@ -1,11 +1,9 @@
 [user]
 name = Erik Allik
-email = eallik@gmail.com
+email = erik.allik@skype.net
 
 [color]
 ui = auto
 
 [core]
-#pager = mate
-[core]
-	editor = emacsclient -nw
+editor = emacsclient -nw

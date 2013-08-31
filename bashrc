@@ -14,42 +14,86 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 
 export MANPATH=/opt/local/share/man:/usr/local/share/man:$MANPATH
 
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:/usr/local/share/python:~/bin:$PATH
+export PATH=~/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
 
-export EDITOR="emacsclient"
+export EDITOR="emacsclient -nw"
 alias ec="emacsclient -nw"
 alias ecw=emacsclient
 
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
 
-# source ~/django_bash_completion
-# source ~/git-completion.bash
-# source ~/pip-completion.bash
 
+# python
+alias skypip="pip install -i http://psi:8123/pypi/ --extra-index-url=http://pypi.python.org/simple"
+
+
+## pythonz
+[[ -s $HOME/.pythonz/etc/bashrc ]] && source $HOME/.pythonz/etc/bashrc
+#export PATH=$HOME/.pythonz/pythons/CPython-2.7.3/bin:$PATH
+
+
+## virtualenvwrapper
+export VIRTUALENVWRAPPER_PYTHON=`which python`
+export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
 source /usr/local/share/python/virtualenvwrapper.sh
-
 export VIRTUALENV_USE_DISTRIBUTE=1
 
+
+#####################
+# git
+#####################
 alias g=git
 alias s='g status'
 alias gs='g status'
 alias a='g add'
 alias ga='g add'
+alias gap='ga -p'
+alias gf='g fetch'
+alias gr='g rebase origin/master master'
+alias gp='g push'
+alias gb='g branch'
+
+# diffing
 alias d='g diff'
 alias gd='g diff'
 alias gds='g diff --staged'
+
+# committing
+alias gcm='g commit'
+alias gcmam='g commit --amend -C HEAD'
+
+# logging
 alias gl='g log --pretty=format:"%Cblue%h%Creset%x09%an%x09 %ar%x09%s" --graph'
-alias gf='g fetch'
-alias gw='gl master..origin/master'  # what's new
-alias gr='g rebase origin/master master'
-alias gst='g stash'
-alias gp='g push'
+alias gin='gl ..origin'  # [w]hat's new
+alias gout='gl origin..'  # what's [u]npushed
+
+# checkout
+alias gc='g checkout'
+alias gcb='gc -b'
+
+# stashing
+alias gsta='g stash'
+alias gstp='g stash pop'
+
+# git svn
+alias gdc='g svn dcommit'
+alias gsr='g svn rebase'
+
+# END GIT
+
 
 alias listf="find . -not -name \"__init__.py\" | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
 alias listd="find . -type d | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
 alias listpy="listf | grep -e \"\\.py$\""
 
-alias onc="cd ~/work/opennode/console"
-alias oms="cd ~/work/opennode/management"
+export AUTOJUMP_KEEP_SYMLINKS=1
+[[ -s ~/.autojump/etc/profile.d/autojump.bash ]] && source ~/.autojump/etc/profile.d/autojump.bash
 
-alias dude='du -d0 -h .'
+alias nano=ec
+
+alias wdts='cd ~/work/dts; workon dts'
+
+alias ns='nosetests -v -s'
+alias nsfail='nosetests -v -s --failed'
+alias nsk='nosetests -v -s ; killmatching nosetests'
+alias nsfailk='nosetests -v -s --failed ; killmatching nosetests'
