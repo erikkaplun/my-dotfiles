@@ -16,7 +16,7 @@ export MANPATH=/opt/local/share/man:/usr/local/share/man:$MANPATH
 
 export PATH=~/bin:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin:$PATH
 
-export PATH=~/.cabal/bin:$PATH
+#export PATH=~/.cabal/bin:$PATH
 export PATH=~/.local/bin:$PATH
 
 export PATH=/usr/texbin:$PATH
@@ -24,14 +24,12 @@ export PATH=/usr/texbin:$PATH
 export PATH="$HOME/Library/Haskell/bin:$PATH"
 
 export EDITOR="emacsclient -nw"
-alias ec="emacsclient -nw"
-alias ecw=emacsclient
+alias ec='emacsclient -nw'
+alias ecw='emacsclient'
+alias em='open -a Emacs'
+alias ls='ls -h'
 
 complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
-
-
-# python
-alias skypip="pip install -i http://psi:8123/pypi/ --extra-index-url=http://pypi.python.org/simple"
 
 
 ## pythonz
@@ -42,7 +40,7 @@ alias skypip="pip install -i http://psi:8123/pypi/ --extra-index-url=http://pypi
 ## virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=`which python`
 export VIRTUALENVWRAPPER_VIRTUALENV=`which virtualenv`
-source /usr/local/bin/virtualenvwrapper.sh
+[[ -f /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
 #export VIRTUALENV_USE_DISTRIBUTE=1
 
 ###########
@@ -59,12 +57,14 @@ alias ssm='ss --modify-stack-yaml'
 #####################
 # git
 #####################
-alias g=git
+alias g='git'
 alias gs='g status'
 alias a='g add'
 alias ga='g add'
 alias gap='ga -p'
 alias gf='g fetch'
+alias gup='g pull'
+alias gwn='gl ..origin/master'
 alias gr='g rebase origin/master master'
 alias gp='g push'
 alias gb='g branch'
@@ -98,22 +98,26 @@ alias gsr='g svn rebase'
 # END GIT
 
 
-alias listf="find . -not -name \"__init__.py\" | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
-alias listd="find . -type d | grep -v -e \"\\.svn\\|\\.git\" | cut -d / -f 2-"
-alias listpy="listf | grep -e \"\\.py$\""
+alias listf='find . -not -name "__init__.py" | grep -v -e "\\.svn\\|\\.git" | cut -d / -f 2-'
+alias listd='find . -type d | grep -v -e "\\.svn\\|\\.git" | cut -d / -f 2-'
+alias listpy='listf | grep -e "\\.py$"'
+
+alias rebel='clj -A:rebel'
+
 
 export AUTOJUMP_KEEP_SYMLINKS=1
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 # [[ -s ~/.autojump/etc/profile.d/autojump.bash ]] && source ~/.autojump/etc/profile.d/autojump.bash
 
-alias nano=ec
+# BREW ###
 
-alias wdts='cd ~/work/dts; workon dts'
+if type brew 2&>/dev/null; then
+    for completion_file in $(brew --prefix)/etc/bash_completion.d/*; do
+        source "$completion_file"
+    done
+fi
 
-alias ns='nosetests -v -s'
-alias nsfail='nosetests -v -s --failed'
-alias nsk='nosetests -v -s ; killmatching nosetests'
-alias nsfailk='nosetests -v -s --failed ; killmatching nosetests'
+# END BREW
 
 function mkcd
 {
@@ -124,9 +128,25 @@ PERL_MB_OPT="--install_base \"/Users/erik/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/erik/perl5"; export PERL_MM_OPT;
 
 _dropbox_puburl() {
-    COMPREPLY=($(compgen -W "$(find ~/Dropbox/Public \( ! -regex '.*/\..*' \) -type f -exec basename \{\} \; | tr "\n" " ")" -- ${COMP_WORDS[COMP_CWORD]}))
+    COMPREPLY=($(compgen -W "$(find ~/Dropbox/Dropbox\ Public \( ! -regex '.*/\..*' \) -type f -exec basename \{\} \; | tr "\n" " ")" -- ${COMP_WORDS[COMP_CWORD]}))
 }
 complete -o nospace -F _dropbox_puburl dropbox-puburl
 
 
 # export PLTCOLLECTS="/Users/erik/.emacs.d/elpa/geiser-20150517.1714/scheme/racket"
+
+#if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+#if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+alias frege='java -Xss1m -cp build:/usr/local/Cellar/frege/3.24.405/libexec/frege3.24.405.jar'
+[ -f "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env" ] && source "${GHCUP_INSTALL_BASE_PREFIX:=$HOME}/.ghcup/env"
+
+
+ecw () {
+   emacs_args="${@}"
+    if [ -z "${emacs_args}" ]; then
+        emacs_args="."
+    fi
+    emacsclient "${emacs_args}"
+}
